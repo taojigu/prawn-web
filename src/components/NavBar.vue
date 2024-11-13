@@ -11,19 +11,19 @@
 <template>
   <div class="nav-bar van-hairline--top">
     <ul class="nav-list">
-      <router-link tag="li" class="nav-list-item active" to="home">
+      <router-link  class="nav-list-item active" to="home">
         <i class="nbicon nblvsefenkaicankaoxianban-1"></i>
         <span>首页</span>
       </router-link>
-      <router-link tag="li" class="nav-list-item" to="category">
+      <router-link  class="nav-list-item" to="category">
         <i class="nbicon nbfenlei"></i>
         <span>分类</span>
       </router-link>
-      <router-link tag="li" class="nav-list-item" to="cart">
-        <van-icon  name="shopping-cart-o" :badge="!count ? '' : count" />
+      <router-link  class="nav-list-item" to="cart">
+        <i><van-icon  name="shopping-cart-o" :badge="!cart.count ? '' : cart.count" /></i>
         <span>购物车</span>
       </router-link>
-      <router-link tag="li" class="nav-list-item" to="user">
+      <router-link  class="nav-list-item" to="user">
         <i class="nbicon nblvsefenkaicankaoxianban-"></i>
         <span>我的</span>
       </router-link>
@@ -31,31 +31,20 @@
   </div>
 </template>
 
-<script>
-import { onMounted, computed } from 'vue'
+<script setup>
+import { onMounted } from 'vue'
 import { useRoute } from 'vue-router'
-import { useStore } from 'vuex'
+import { useCartStore } from '@/stores/cart'
 import { getLocal } from '@/common/js/utils'
-export default {
-  setup() {
-    const route = useRoute()
-    const store = useStore()
-    onMounted(() => {
-      const token = getLocal('token')
-      const path = route.path
-      if (token && !['/home', '/category'].includes(path)) {
-        store.dispatch('updateCart')
-      }
-    })
-    const count = computed(() => {
-      return store.state.cartCount
-    })
-
-    return {
-      count
-    }
+const route = useRoute()
+const cart = useCartStore()
+onMounted(() => {
+  const token = getLocal('token')
+  const path = route.path
+  if (token && !['/home', '/category'].includes(path)) {
+    cart.updateCart()
   }
-}
+})
 </script>
 
 <style lang="less" scoped >
