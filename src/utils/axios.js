@@ -14,7 +14,7 @@
  console.log('import.meta.env', import.meta.env)
  
  //axios.defaults.baseURL = import.meta.env.MODE == 'development' ? '//backend-api-01.newbee.ltd/api/v1' : '//backend-api-01.newbee.ltd/api/v1'
-axios.defaults.baseURL = '//13.211.46.96:28019/ltd/newbee/mall/api/v1'
+axios.defaults.baseURL = '//ec2-3-107-74-190.ap-southeast-2.compute.amazonaws.com:28019/ltd/newbee/mall/api/v1'
 axios.defaults.withCredentials = true
 axios.defaults.headers['X-Requested-With'] = 'XMLHttpRequest'
 axios.defaults.headers['token'] = localStorage.getItem('token') || ''
