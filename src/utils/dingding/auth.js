@@ -5,6 +5,7 @@
 import * as dd from 'dingtalk-jsapi';
 import axios from 'axios';
 import {DingCorpID} from "./ding_config.json"
+import {showToast} from "vant";
 
 export async function dingdingConfig() {
   const { data } = await axios.get('prawn/ding/auth/signature')
@@ -34,7 +35,7 @@ export async function dingdingConfig() {
 
 export  async function requestDingToken(){
     const authCode = await requstDingAuthCode(DingCorpID);
-    console.log(`ding auth code is :${authCode}`)
+    showToast(`code is ${authCode}`)
     const url = 'prawn/ding/token';
     const param = {
       code:authCode
