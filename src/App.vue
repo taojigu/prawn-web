@@ -37,10 +37,10 @@ router.beforeEach((to, from) => {
 })
 
 onBeforeMount(async ()=>{
-
+  await dingdingConfig()
   const token = await fetchUserToken()
   saveUserToken(token)
-  await dingdingConfig()
+
 })
 </script>
 
