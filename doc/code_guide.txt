@@ -1,2 +1,4 @@
 remote url: ngrok http 3000
+###Dingding
 local debug: https://open.dingtalk.com/document/resourcedownload/local-development-tools-for-microapplications
+auth code： https://open-dev.dingtalk.com/apiExplorer?spm=ding_open_doc.document.0.0.673539b7a86KKk#/jsapi?api=runtime.permission.requestAuthCode
