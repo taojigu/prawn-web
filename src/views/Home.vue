@@ -1,12 +1,4 @@
-<!--
- * 严肃声明：
- * 开源版本请务必保留此注释头信息，若删除我方将保留所有法律责任追究！
- * 本系统已申请软件著作权，受国家版权局知识产权以及国家计算机软件著作权保护！
- * 可正常分享和学习源码，不得用于违法犯罪活动，违者必究！
- * Copyright (c) 2020 陈尼克 all rights reserved.
- * 版权所有，侵权必究！
- *
--->
+
 
 <template>
   <div>
@@ -29,6 +21,9 @@
         <img :src="item.imgUrl">
         <span>{{item.name}}</span>
       </div>
+    </div>
+    <div>
+      <van-button @click="dingLogin">Test11</van-button>
     </div>
     <div class="good">
       <header class="good-header">新品上线</header>
@@ -58,6 +53,7 @@
         </div>
       </van-skeleton>
     </div>
+
     <div class="good" :style="{ paddingBottom: '100px'}">
       <header class="good-header">最新推荐</header>
       <van-skeleton title :row="3" :loading="state.loading">
@@ -84,6 +80,8 @@ import { getHome } from '@/service/home'
 import { getLocal } from '@/common/js/utils'
 import { showLoadingToast, closeToast, showToast } from 'vant'
 import { useCartStore } from '@/stores/cart'
+import {dingdingConfig} from "@/utils/dingding/auth";
+import {fetchUserToken, saveUserToken} from "@/utils/user_info";
 const cart = useCartStore()
 const router = useRouter()
 const state = reactive({
@@ -96,11 +94,11 @@ const state = reactive({
   categoryList: [
     {
       name: '新蜂超市',
-      imgUrl: 'https://s.yezgea02.com/1604041127880/%E8%B6%85%E5%B8%82%402x.png',
+      imgUrl: 'https://prawn-image-bucket1.s3.ap-southeast-2.amazonaws.com/product_test/20241127122624_Regular_life_NZ.jpg',
       categoryId: 100001
     }, {
       name: '新蜂服饰',
-      imgUrl: 'https://s.yezgea02.com/1604041127880/%E6%9C%8D%E9%A5%B0%402x.png',
+      imgUrl: 'https://prawn-image-bucket1.s3.ap-southeast-2.amazonaws.com/product_image/2209cfa2-9521-47af-a924-37547db07e85_Regular_life_NZ',
       categoryId: 100003
     }, {
       name: '全球购',
@@ -167,6 +165,14 @@ nextTick(() => {
 
 const goToDetail = (item) => {
   router.push({ path: `/product/${item.goodsId}` })
+}
+const dingLogin = async () =>{
+
+ showToast("Clicked Test")
+  await dingdingConfig()
+  const token = await fetchUserToken()
+  saveUserToken(token)
+
 }
 
 const tips = () => {

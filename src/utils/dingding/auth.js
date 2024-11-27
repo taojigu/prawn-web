@@ -6,9 +6,10 @@ import * as dd from 'dingtalk-jsapi';
 import axios from 'axios';
 import {DingCorpID} from "./ding_config.json"
 import {showToast} from "vant";
+import {error} from "dingtalk-jsapi";
 
 export async function dingdingConfig() {
-  const { data } = await axios.get('prawn/ding/auth/signature')
+  const { data } = await axios.get('api/v1/prawn/ding/auth/signature')
   //const url = data['url']
   const timeStamp = data['timeStamp']
   console.log(timeStamp)
@@ -68,6 +69,7 @@ function permissonRequestAuthCode(corpId){
             resolve(info.code);
         },
         onFail: function (res) {
+            showToast(res)
             console.log(res);
         }
     }).then( r =>{});
