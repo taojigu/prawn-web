@@ -20,6 +20,7 @@ import { useRouter, RouterView } from 'vue-router'
 import {dingdingConfig} from "@/utils/dingding/auth";
 import {fetchUserToken, saveUserToken} from "@/utils/user_info";
 import { initDingH5RemoteDebug } from "dingtalk-h5-remote-debug";
+import VConsole from 'vconsole';
 initDingH5RemoteDebug();
 const router = useRouter()
 const state = reactive({
@@ -37,6 +38,7 @@ router.beforeEach((to, from) => {
 })
 
 onBeforeMount(async ()=>{
+  const vConsole = new VConsole()
   await dingdingConfig()
   const token = await fetchUserToken()
   saveUserToken(token)

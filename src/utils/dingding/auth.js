@@ -14,15 +14,15 @@ export async function dingdingConfig() {
   const timeStamp = data['timeStamp']
   console.log(timeStamp)
   const agentId = data['agentId']
-  console.log(agentId)
+
   const corpId = data['corpId']
-  console.log(corpId)
+
   const nonceStr = data['nonceStr']
-  console.log(nonceStr)
+
   const apiList = data['jsApiList']
-  console.log(apiList)
+
   const signature = data['signature']
-  console.log(signature)
+
   dd.config({
     agentId: agentId,
     corpId: corpId,
