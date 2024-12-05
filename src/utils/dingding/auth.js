@@ -12,7 +12,6 @@ export async function dingdingConfig() {
   const { data } = await axios.get('api/v1/prawn/ding/auth/signature')
   //const url = data['url']
   const timeStamp = data['timeStamp']
-  console.log(timeStamp)
   const agentId = data['agentId']
 
   const corpId = data['corpId']
@@ -53,10 +52,19 @@ export  async function requestDingToken(){
 export function requstDingAuthCode(corpId) {
   return new Promise(
     function (resolve){
-      dd.ready(async ()=>{ 
-          const code = await permissonRequestAuthCode(corpId);
-          resolve(code);
+      dd.ready(async ()=>{
+          try {
+              const code = await permissonRequestAuthCode(corpId);
+              console.log(`the auth code is ${code}`)
+              resolve(code);
+          }
+          catch (error) {
+              console.error('Error inside dd.ready:', error);
+          }
       });
+        dd.error((error) => {
+            console.error('DingTalk SDK initialization error:', error);
+        });
     });
 }
 
