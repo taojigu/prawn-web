@@ -15,8 +15,13 @@
 </template>
 
 <script setup>
-import { reactive, toRefs } from 'vue'
+import {onBeforeMount, reactive, toRefs} from 'vue'
 import { useRouter, RouterView } from 'vue-router'
+import {dingdingConfig} from "@/utils/dingding/auth";
+import {fetchUserToken, saveUserToken} from "@/utils/user_info";
+import { initDingH5RemoteDebug } from "dingtalk-h5-remote-debug";
+import VConsole from 'vconsole';
+initDingH5RemoteDebug();
 const router = useRouter()
 const state = reactive({
   transitionName: 'slide-left'
@@ -30,6 +35,15 @@ router.beforeEach((to, from) => {
   } else {
     state.transitionName = ''   // 同级无过渡效果
   }
+})
+
+onBeforeMount(async ()=>{
+  const vConsole = new VConsole()
+  console.log("home mount")
+  await dingdingConfig()
+  const token = await fetchUserToken()
+  saveUserToken(token)
+
 })
 </script>
 
