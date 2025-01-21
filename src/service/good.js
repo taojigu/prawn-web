@@ -14,7 +14,7 @@ export function getDetail(id) {
 }
 
 export function getCategory() {
-  return axios.get('/categories');
+  return axios.get('/ltd/newbee/mall/api/v1/categories');
 }
 
 export function search(params) {
