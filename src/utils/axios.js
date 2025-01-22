@@ -17,7 +17,7 @@
 axios.defaults.baseURL = 'https://preprawn.ink'
 axios.defaults.withCredentials = true
 axios.defaults.headers['X-Requested-With'] = 'XMLHttpRequest'
-axios.defaults.headers['token'] = localStorage.getItem('token') || ''
+axios.defaults.headers['token'] = localStorage.getItem('token') || '123456'
 axios.defaults.headers['Access-Control-Allow-Origin'] = '*'
 axios.defaults.headers.post['Content-Type'] = 'application/json'
 

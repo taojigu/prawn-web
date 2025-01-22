@@ -10,7 +10,7 @@
 import axios from '../utils/axios'
 
 export function getUserInfo() {
-  return axios.get('/user/info');
+  return axios.get('/ltd/api/v1/prawn/user');
 }
 
 export function EditUserInfo(params) {
