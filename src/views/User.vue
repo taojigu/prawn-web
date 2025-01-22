@@ -14,11 +14,11 @@
     <van-skeleton title :avatar="true" :row="3" :loading="state.loading">
       <div class="user-info">
         <div class="info">
-          <img src="https://s.yezgea02.com/1604040746310/aaaddd.png"/>
+          <img :src="state.user.avatar">
           <div class="user-desc">
-            <span>昵称：{{ state.user.nickName }}</span>
+            <span>昵称：{{ state.user.name }}</span>
             <span>登录名：{{ state.user.loginName }}</span>
-            <span class="name">个性签名：{{ state.user.introduceSign }}</span>
+            <span class="name">组织：{{ state.user.orgName }}</span>
           </div>
         </div>
       </div>
