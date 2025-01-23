@@ -56,6 +56,7 @@ import {computed, reactive} from "vue";
 import image_compressor from "@/common/js/image_compressor";
 import uploadImage$ from "dingtalk-jsapi/api/biz/util/uploadImage";
 import {uploadImage} from "@/common/js/uploader";
+import {createProduct} from "@/service/product";
 
 const state = reactive({
       productName: "",
@@ -67,15 +68,15 @@ const state = reactive({
 const handleSubmit = async () => {
   const file = state.images[0]
   const cmpFile = await image_compressor.compress(file.file)
-  const url = uploadImage(cmpFile)
+  const {data} = await uploadImage(cmpFile)
   const param = {
-    productName:state.productName,
-    productDetail:state.productDetail,
-    productPrice:state.productPrice,
-    imageUrl:url
+    title:state.productName,
+    description:state.productDetail,
+    price:state.productPrice,
+    productImage:data,
+    keyWord:"test"
   }
-
-
+  await createProduct(param)
 
 
 }
