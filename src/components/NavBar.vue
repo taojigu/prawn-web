@@ -11,7 +11,7 @@
 <template>
   <div class="nav-bar van-hairline--top">
     <ul class="nav-list">
-      <router-link  class="nav-list-item active" to="home">
+      <router-link  class="nav-list-item active" to="home2">
         <i class="nbicon nblvsefenkaicankaoxianban-1"></i>
         <span>首页</span>
       </router-link>

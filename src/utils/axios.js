@@ -22,10 +22,10 @@ axios.defaults.headers['Access-Control-Allow-Origin'] = '*'
 axios.defaults.headers.post['Content-Type'] = 'application/json'
 
  axios.interceptors.response.use(res => {
-   if (typeof res.data !== 'object') {
-    showFailToast('服务端异常！')
-     return Promise.reject(res)
-   }
+   // if (typeof res.data !== 'object') {
+   //  showFailToast('服务端异常！')
+   //   return Promise.reject(res)
+   // }
    if (res.data.resultCode != 200) {
      if (res.data.message) showFailToast(res.data.message)
      if (res.data.resultCode == 416) {
