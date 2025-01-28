@@ -6,7 +6,7 @@ import {showToast} from "vant";
 export async function fetchUserToken() {
 
     const result =  await requestDingToken();
-    console.log(`token is ${result.data}`)
+    console.log(`fetch user token is ${result.data}`)
     return result.data;
 }
 
@@ -18,7 +18,7 @@ export async function fetchAuthCode(){
 
 export function localUserToken() {
     let token = getLocalItem("token");
-    console.info(`read local token ${token}`)
+    console.log(`read local token ${token}`)
     return token
 }
 
