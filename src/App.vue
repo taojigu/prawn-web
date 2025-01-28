@@ -1,12 +1,4 @@
-<!--
- * 严肃声明：
- * 开源版本请务必保留此注释头信息，若删除我方将保留所有法律责任追究！
- * 本系统已申请软件著作权，受国家版权局知识产权以及国家计算机软件著作权保护！
- * 可正常分享和学习源码，不得用于违法犯罪活动，违者必究！
- * Copyright (c) 2020 陈尼克 all rights reserved.
- * 版权所有，侵权必究！
- *
--->
+
 
 <template>
   <div id="app">
@@ -19,9 +11,7 @@ import {onBeforeMount, reactive, toRefs} from 'vue'
 import { useRouter, RouterView } from 'vue-router'
 import {dingdingConfig} from "@/utils/dingding/auth";
 import {fetchUserToken, saveUserToken} from "@/utils/user_info";
-import { initDingH5RemoteDebug } from "dingtalk-h5-remote-debug";
 import VConsole from 'vconsole';
-initDingH5RemoteDebug();
 const router = useRouter()
 const state = reactive({
   transitionName: 'slide-left'
@@ -41,8 +31,9 @@ onBeforeMount(async ()=>{
   const vConsole = new VConsole()
   console.log("home mount")
   await dingdingConfig()
-  const token = await fetchUserToken()
+  let token = await fetchUserToken()
   saveUserToken(token)
+
 
 })
 </script>

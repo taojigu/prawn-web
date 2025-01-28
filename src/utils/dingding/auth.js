@@ -12,7 +12,7 @@ export async function dingdingConfig() {
     const param = {
         'url':url
     }
-    const {data} = await axios.get('api/v1/prawn/ding/auth/signature')
+    const {data} = await axios.get('prawn/ding/auth/signature')
     //const {data} = await axios.post('api/v1/prawn/ding/auth/signature',param)
     //const url = data['url']
     const timeStamp = data['timeStamp']
@@ -36,7 +36,6 @@ export async function dingdingConfig() {
 
 export async function requestDingToken() {
     const authCode = await requestDingAuthCode(DingCorpID);
-    showToast(`code is ${authCode}`)
     const url = 'prawn/ding/token';
     const param = {
         code: authCode

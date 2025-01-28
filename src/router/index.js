@@ -1,17 +1,18 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import Home from '@/views/Home.vue'
+
+import Home2 from "@/views/Home2.vue";
 
 const router = createRouter({
   history: createWebHashHistory(),
   routes: [
     {
       path: '/',
-      redirect: '/home'
+      redirect: '/home2'
     },
     {
-      path: '/home',
+      path: '/home2',
       name: 'home',
-      component: Home,
+      component: Home2,
       meta: {
         index: 1
       }
@@ -111,6 +112,11 @@ const router = createRouter({
       meta: {
         index: 2
       }
+    },
+    {
+      path:'/add-product',
+      name:'AddProduct',
+      component: ()=> import('@/views/AddProduct.vue')
     },
     {
       path: '/about',
