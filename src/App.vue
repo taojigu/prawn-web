@@ -32,6 +32,7 @@ onBeforeMount(async ()=>{
   console.log("home mount")
   await dingdingConfig()
   const token = await fetchUserToken()
+  console.log(`save token ${token}`)
   saveUserToken(token)
 
 })

@@ -123,6 +123,7 @@ const dingLogin = async () => {
   showToast("Clicked Test")
   await dingdingConfig()
   const token = await fetchUserToken()
+  console.log(`ding login save token ${token}`)
   saveUserToken(token)
 
 }
