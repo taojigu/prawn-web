@@ -8,7 +8,7 @@ export function createProduct(param) {
 }
 //保存产品信息
 export function saveProduct(param) {
-    return axios.post('/api/v1/prawn/save-product',param);
+    return axios.post('prawn/save-product',param);
 }
 
 //发布产品
