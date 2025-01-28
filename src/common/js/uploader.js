@@ -14,7 +14,7 @@ export function uploadImage(file) {
         let config = {
             headers:{ 'Content-Type': 'multipart/form-data' }
         };
-        return axios.post("/api/v1/prawn/aws/upload/image",body,config);
+        return axios.post("/prawn/aws/upload/image",body,config);
 
     } catch (error) {
         console.error("Error uploading image:", error.message);

@@ -14,7 +14,7 @@
  console.log('import.meta.env', import.meta.env)
  
  //axios.defaults.baseURL = import.meta.env.MODE == 'development' ? '//backend-api-01.newbee.ltd/api/v1' : '//backend-api-01.newbee.ltd/api/v1'
-axios.defaults.baseURL = 'https://preprawn.ink'
+axios.defaults.baseURL = 'https://preprawn.ink/api/v1/'
 axios.defaults.withCredentials = true
 axios.defaults.headers['X-Requested-With'] = 'XMLHttpRequest'
 axios.defaults.headers['token'] = localStorage.getItem('token') || '123456'
