@@ -36,7 +36,6 @@ export async function dingdingConfig() {
 
 export async function requestDingToken() {
     const authCode = await requestDingAuthCode(DingCorpID);
-    showToast(`code is ${authCode}`)
     const url = 'prawn/ding/token';
     const param = {
         code: authCode

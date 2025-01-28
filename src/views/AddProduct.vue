@@ -42,11 +42,12 @@
           <img :src="file.content" class="preview-image"/>
         </template>
       </van-uploader>
-
       <!-- Submit Button -->
       <div style="margin-top: 20px;">
         <van-button type="primary" block native-type="submit" :disabled="isDisableSubmit">Submit</van-button>
+
       </div>
+
     </van-form>
   </div>
 </template>
@@ -57,7 +58,10 @@ import image_compressor from "@/common/js/image_compressor";
 import uploadImage$ from "dingtalk-jsapi/api/biz/util/uploadImage";
 import {uploadImage} from "@/common/js/uploader";
 import {createProduct} from "@/service/product";
+import {showLoadingToast, Toast} from "vant";
+import {useRouter} from "vue-router";
 
+const router = useRouter()
 const state = reactive({
       productName: "",
       productDetail: "",
@@ -65,7 +69,12 @@ const state = reactive({
       images: [],
     }
 )
+
 const handleSubmit = async () => {
+  showLoadingToast({
+    message: '产品发布中...',
+    forbidClick: true
+  });
   const file = state.images[0]
   const cmpFile = await image_compressor.compress(file.file)
   const {data} = await uploadImage(cmpFile)
@@ -78,6 +87,7 @@ const handleSubmit = async () => {
   }
   await createProduct(param)
 
+  router.go(-1)
 
 }
 

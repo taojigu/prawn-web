@@ -6,7 +6,7 @@ import {showToast} from "vant";
 export async function fetchUserToken() {
 
     const result =  await requestDingToken();
-    showToast(result)
+    console.log(`token is ${result.data}`)
     return result.data;
 }
 
