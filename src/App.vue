@@ -31,9 +31,9 @@ onBeforeMount(async ()=>{
   const vConsole = new VConsole()
   console.log("home mount")
   await dingdingConfig()
-  const token = await fetchUserToken()
-  console.log(`save token ${token}`)
+  let token = await fetchUserToken()
   saveUserToken(token)
+
 
 })
 </script>

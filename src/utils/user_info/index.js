@@ -17,7 +17,9 @@ export async function fetchAuthCode(){
 }
 
 export function localUserToken() {
-    return getLocalItem("token");
+    let token = getLocalItem("token");
+    console.info(`read local token ${token}`)
+    return token
 }
 
 export function saveUserToken(token) {

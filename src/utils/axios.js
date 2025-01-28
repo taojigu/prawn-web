@@ -10,6 +10,7 @@
  import { showToast, showFailToast } from 'vant'
  import { setLocal } from '@/common/js/utils'
  import router from '../router'
+import {localUserToken} from "@/utils/user_info";
 
  console.log('import.meta.env', import.meta.env)
  
@@ -17,7 +18,7 @@
 axios.defaults.baseURL = 'https://preprawn.ink/api/v1/'
 axios.defaults.withCredentials = true
 axios.defaults.headers['X-Requested-With'] = 'XMLHttpRequest'
-axios.defaults.headers['token'] = localStorage.getItem('token') || '123456'
+axios.defaults.headers['token'] = localUserToken() || '123456'
 axios.defaults.headers['Access-Control-Allow-Origin'] = '*'
 axios.defaults.headers.post['Content-Type'] = 'application/json'
 
