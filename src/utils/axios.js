@@ -6,40 +6,52 @@
  * Copyright (c) 2020 陈尼克 all rights reserved.
  * 版权所有，侵权必究！
  */
- import axios from 'axios'
- import { showToast, showFailToast } from 'vant'
- import { setLocal } from '@/common/js/utils'
- import router from '../router'
+import axios from 'axios'
+import {showToast, showFailToast} from 'vant'
+import {setLocal} from '@/common/js/utils'
+import router from '../router'
 import {localUserToken} from "@/utils/user_info";
 
- console.log('import.meta.env', import.meta.env)
- 
- //axios.defaults.baseURL = import.meta.env.MODE == 'development' ? '//backend-api-01.newbee.ltd/api/v1' : '//backend-api-01.newbee.ltd/api/v1'
+console.log('import.meta.env', import.meta.env)
+
+//axios.defaults.baseURL = import.meta.env.MODE == 'development' ? '//backend-api-01.newbee.ltd/api/v1' : '//backend-api-01.newbee.ltd/api/v1'
 axios.defaults.baseURL = 'https://preprawn.ink/api/v1/'
 axios.defaults.withCredentials = true
 axios.defaults.headers['X-Requested-With'] = 'XMLHttpRequest'
-axios.defaults.headers['token'] = localUserToken() || '123456'
+
 axios.defaults.headers['Access-Control-Allow-Origin'] = '*'
 axios.defaults.headers.post['Content-Type'] = 'application/json'
 
- axios.interceptors.response.use(res => {
-   // if (typeof res.data !== 'object') {
-   //  showFailToast('服务端异常！')
-   //   return Promise.reject(res)
-   // }
-   if (res.data.resultCode !== 200) {
-     if (res.data.message) showFailToast(res.data.message)
-     if (res.data.resultCode === 416) {
-       router.push({path: '/login'})
-      }
-     if (res.data.data && window.location.hash === '#/login') {
-       setLocal('token', res.data.data)
-       axios.defaults.headers['token'] = res.data.data
-     }
-     return Promise.reject(res.data)
-   }
-   return res.data
- })
- 
- export default axios
+axios.interceptors.request.use(
+    (config) => {
+        // Modify the request configuration
+        config.headers['token'] = localUserToken() || '123456'
+        return config;
+    },
+    (error) => {
+        // Handle errors
+        return Promise.reject(error);
+    }
+);
+
+axios.interceptors.response.use(res => {
+    // if (typeof res.data !== 'object') {
+    //  showFailToast('服务端异常！')
+    //   return Promise.reject(res)
+    // }
+    if (res.data.resultCode !== 200) {
+        if (res.data.message) showFailToast(res.data.message)
+        if (res.data.resultCode === 416) {
+            router.push({path: '/login'})
+        }
+        if (res.data.data && window.location.hash === '#/login') {
+            setLocal('token', res.data.data)
+            axios.defaults.headers['token'] = res.data.data
+        }
+        return Promise.reject(res.data)
+    }
+    return res.data
+})
+
+export default axios
  
