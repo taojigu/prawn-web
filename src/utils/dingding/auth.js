@@ -1,11 +1,46 @@
 /**
- * Dingding Auth 相关相关的方法
+ * Auth 相关相关的方法
  */
 import * as dd from 'dingtalk-jsapi';
 import axios from 'axios';
 import {DingCorpID} from "./ding_config.json"
 import {showToast} from "vant";
-import {error} from "dingtalk-jsapi";
+import {Platform} from "@/const/platform";
+import {fetchDingToken} from "@/utils/user_info";
+import * as microsoftTeams from "@microsoft/teams-js";
+
+
+export async function fetchPlatformToken(platform) {
+    if (platform === Platform.Teams ) {
+        return await fetchTeamsToken()
+    }
+
+    if (platform === Platform.Ding || platform === undefined) {
+        await dingdingConfig();
+        return await fetchDingToken()
+    }
+    return Promise.resolve(null);
+}
+
+
+async function fetchTeamsToken() {
+    return  new Promise(
+        function (resolve){
+            microsoftTeams.app.initialize().then(() => {
+                microsoftTeams.authentication.getAuthToken({
+                    successCallback: (token) => {
+                        console.log("Teams Access Token:", token);
+                        resolve.resolve(token)
+                    },
+                    failureCallback: (error) => {
+                        console.error("Teams Failed to get token:", error);
+                    }
+                });
+            });
+        }
+    )
+}
+
 
 export async function dingdingConfig() {
     const url = encodeURIComponent(location.href.split('#')[0]);

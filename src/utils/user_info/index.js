@@ -3,7 +3,8 @@ import {requestDingToken,requestDingAuthCode} from "../dingding/auth"
 import {DingCorpID} from "../dingding/ding_config"
 import {showToast} from "vant";
 
-export async function fetchUserToken() {
+
+export async function fetchDingToken() {
 
     const result =  await requestDingToken();
     console.log(`fetch user token is ${result.data}`)

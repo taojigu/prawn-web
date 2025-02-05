@@ -8,9 +8,9 @@
 
 <script setup>
 import {onBeforeMount, reactive, toRefs} from 'vue'
-import { useRouter, RouterView } from 'vue-router'
-import {dingdingConfig} from "@/utils/dingding/auth";
-import {fetchUserToken, saveUserToken} from "@/utils/user_info";
+import {useRouter, RouterView, useRoute} from 'vue-router'
+import {fetchPlatformToken} from "@/utils/dingding/auth";
+import {saveUserToken} from "@/utils/user_info";
 import VConsole from 'vconsole';
 const router = useRouter()
 const state = reactive({
@@ -30,10 +30,12 @@ router.beforeEach((to, from) => {
 onBeforeMount(async ()=>{
   const vConsole = new VConsole()
   console.log("home mount")
-  await dingdingConfig()
-  let token = await fetchUserToken()
-  console.log(`save user token ${token}`)
-  saveUserToken(token)
+  // const route = useRoute()
+  // const platform = route.query.platform
+  // console.log(`platform is ${platform}`)
+  // const token = fetchPlatformToken(platform)
+  // console.log(`save user token ${token}`)
+  // saveUserToken(token)
 
 })
 </script>
