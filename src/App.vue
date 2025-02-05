@@ -34,7 +34,7 @@ onBeforeMount(async ()=>{
   const queryParams = new URLSearchParams(url.search);
   const platform = queryParams.get("platform")
   console.log(`platform is ${platform}`)
-  const token = fetchPlatformToken(platform)
+  const token = await fetchPlatformToken(platform)
   console.log(`platform token is ${token}`)
   saveUserToken(token)
 
