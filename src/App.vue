@@ -30,10 +30,10 @@ router.beforeEach((to, from) => {
 onBeforeMount(async ()=>{
   const vConsole = new VConsole()
   console.log("home mount")
-  await dingdingConfig()
-  let token = await fetchUserToken()
-  console.log(`save user token ${token}`)
-  saveUserToken(token)
+  const url = new URL(window.location.href);
+  const queryParams = new URLSearchParams(url.search);
+  const platform = queryParams.get("platform")
+  console.log(`platform is ${platform}`)
 
 })
 </script>
