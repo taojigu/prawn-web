@@ -9,9 +9,9 @@
 <script setup>
 import {onBeforeMount, reactive, toRefs} from 'vue'
 import { useRouter, RouterView } from 'vue-router'
-import {dingdingConfig} from "@/utils/dingding/auth";
-import {fetchUserToken, saveUserToken} from "@/utils/user_info";
 import VConsole from 'vconsole';
+import {saveUserToken} from "@/utils/user_info";
+import {fetchPlatformToken} from "@/utils/platform_auth";
 const router = useRouter()
 const state = reactive({
   transitionName: 'slide-left'
@@ -30,9 +30,12 @@ router.beforeEach((to, from) => {
 onBeforeMount(async ()=>{
   const vConsole = new VConsole()
   console.log("home mount")
-  await dingdingConfig()
-  let token = await fetchUserToken()
-  console.log(`save user token ${token}`)
+  const url = new URL(window.location.href);
+  const queryParams = new URLSearchParams(url.search);
+  const platform = queryParams.get("platform")
+  console.log(`platform is ${platform}`)
+  const token = await fetchPlatformToken(platform)
+  console.log(`platform token is ${token}`)
   saveUserToken(token)
 
 })
