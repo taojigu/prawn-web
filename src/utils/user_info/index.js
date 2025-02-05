@@ -22,6 +22,6 @@ export function localUserToken() {
     return token
 }
 
-export function saveUserToken(token) {
+export function saveLocalUserToken(token) {
     setLocalItem("token",token);
 }

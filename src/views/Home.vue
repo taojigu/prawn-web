@@ -81,7 +81,7 @@ import { getLocal } from '@/common/js/utils'
 import { showLoadingToast, closeToast, showToast } from 'vant'
 import { useCartStore } from '@/stores/cart'
 import {dingdingConfig} from "@/utils/dingding/auth";
-import {fetchUserToken, saveUserToken} from "@/utils/user_info";
+import {fetchUserToken, saveLocalUserToken} from "@/utils/user_info";
 const cart = useCartStore()
 const router = useRouter()
 const state = reactive({
@@ -171,7 +171,7 @@ const dingLogin = async () =>{
  showToast("Clicked Test")
   await dingdingConfig()
   const token = await fetchUserToken()
-  saveUserToken(token)
+  saveLocalUserToken(token)
 
 }
 

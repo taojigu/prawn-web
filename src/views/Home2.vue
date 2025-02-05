@@ -74,7 +74,7 @@ import {getLocal} from '@/common/js/utils'
 import {showLoadingToast, closeToast, showToast} from 'vant'
 import {useCartStore} from '@/stores/cart'
 import {dingdingConfig} from "@/utils/dingding/auth";
-import {fetchUserToken, saveUserToken} from "@/utils/user_info";
+import {fetchUserToken, saveLocalUserToken} from "@/utils/user_info";
 
 const cart = useCartStore()
 const router = useRouter()
@@ -93,7 +93,7 @@ onMounted(async () => {
   if (token) {
     state.isLogin = true
     // 获取购物车数据.
-    cart.updateCart()
+    await cart.updateCart()
   }
   showLoadingToast({
     message: '加载中...',
@@ -124,7 +124,7 @@ const dingLogin = async () => {
   await dingdingConfig()
   const token = await fetchUserToken()
   console.log(`ding login save token ${token}`)
-  saveUserToken(token)
+  saveLocalUserToken(token)
 
 }
 
