@@ -11,6 +11,7 @@ import {onBeforeMount, reactive, toRefs} from 'vue'
 import { useRouter, RouterView } from 'vue-router'
 import VConsole from 'vconsole';
 import {saveUserToken} from "@/utils/user_info";
+import {fetchPlatformToken} from "@/utils/platform_auth";
 const router = useRouter()
 const state = reactive({
   transitionName: 'slide-left'
@@ -33,9 +34,9 @@ onBeforeMount(async ()=>{
   const queryParams = new URLSearchParams(url.search);
   const platform = queryParams.get("platform")
   console.log(`platform is ${platform}`)
-  // const token = fetchPlatformToken(platform)
-  // console.log(`platform token is ${token}`)
-  // saveUserToken(token)
+  const token = fetchPlatformToken(platform)
+  console.log(`platform token is ${token}`)
+  saveUserToken(token)
 
 })
 </script>
